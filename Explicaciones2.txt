@@ -1,0 +1,5 @@
+1) Convierte una cadena de caracteres en int
+
+2) la funcion atof() nos eprmite convertir a float.
+
+3) itoa() 

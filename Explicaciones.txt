@@ -1,0 +1,9 @@
+argc contiene el numero de argumentos que se han introducido y argv es un array de puntero de caracteres (Que avanza para comparar los caracteres en el if y el else if)
+y cada elemento del argv apunta a un agumento de la linea de ordenes y todas estas lineas  de ordenes son cadenas 
+
+
+
+
+
+
+

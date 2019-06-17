@@ -1,310 +1,248 @@
-# Laboratorio de introducción al lenguaje C
+# Introduccion al lenguaje C
 
-> **Objetivos**
-> * Reforzar los conceptos discutidos en el laboratorio.
-> * Ir ganando experiencia en la resolución de problemas empleando lenguaje C. 
+## Objetivos ##
 
-## Lecturas opcionales previas
+> 1. Comprender y usar el lenguaje de progrmación C.
+> 2. Aprender a emplear de manera basica el GCC (GNU compile colection) para codificar y compilar programas en C.
+> 3. Codificar aplicaciones en C haciendo esta herramienta.
 
-Se recomienda antes de empezar revisar los siguientes enlaces:
-1. **Teoria sobre la introduccion al lenguaje C**: La cual puede ser accedida en el siguiente [enlace](https://github.com/repos-SO-UdeA/laboratorios/blob/master/lab1/teoria/parte1/intro_C_basico.ipynb).
+## Antes de empezar ##
 
-## Actividad de laboratorio
-Desarrollar por parejas los siguientes ejercicios: 
-* **Estructuras de programación**: P1, P2, P3.
-* **Funciones**: P1, P2, P3, P5, P8, P9 y P10.
+Antes de empezar el laboratorio, acepte el link en el cual se muestra la tarea. Luego de esto, elija un directorio de trabajo apropidado y clone alli la tarea. Suponiendo que el directorio de trabajo se llamase: ```/home/don_ramon/Documents/sistemas_operativos/lab_C``` y el repositorio correspondiente estuviera en https://github.com/so-udea/intro-C, los comandos a aplicar seran similares a los mostrados a continuación:
 
-**Nota**: Recuerde usar git a lo largo del desarrollo de cada uno de los ejercicios.  
-
-## 1. Ejemplos de repaso
-
-A modo de repaso se mostraran algunos ejercicios resueltos que implican el uso de programacion modular. Puede descargarlos, compilarlos y ejecutarlos.
-
-1. Hacer un programa que calcule el máximo de 2 números.
-
-**Solucion**: [ejemplo1_sol.c](ejemplo1_sol.c)
-
-2. Hacer un programa que diga si un numero es cuadrado perfecto.
-
-**Solucion**: [ejemplo2_sol.c](ejemplo2_sol.c)
-
-3. Hacer un programa que permita calcular el área de diferentes figuras geométricas.
-
-**Solucion**: [ejemplo3_sol.c](ejemplo3_sol.c)
-
-4. Hacer una función que solicite 2 números, genere 10 números aleatorios entre estos 2
-números y cuente la cantidad de números pares.
-
-**Solucion**: [ejemplo4_sol.c](ejemplo4_sol.c)
-
-5. Realizar un programa que calcule el valor de la función seno usando la serie equivalente para
-ello. Los valores de entrada son x y el número de términos. A continuación se muestra la serie
-equivalente:
-
-**Solucion**: [ejemplo5_sol.c](ejemplo5_sol.c)
-
-## 2. Ejercicios de repaso
-
-### 2.1. Estructuras de programación
-
-**P1**. El propietario de Harry’s Car Sales paga a cada vendedor una comisión basada en sus ventas trimestrales. Los rangos de ventas y las correspondientes tasas son mostrades en la tabla que aparece a continuación:
-
-| Ventas trimestrales ($) | Comisión |
-|---|---|
-| 0 - 20000 |  Multiplicar las ventas por 5% |
-|  20001-50000 | Multiplicar la ventas sobre 20000 por 7% y entonces agregue 1000 al resultado |
-|  50001 o mas | Multiplicar la ventas sobre 50000 por 10% y entonces agregue 3100 al resultado  | 
-
-Teniendo en cuenta lo anterior lleve a cabo las siguientes tareas:
-* Comprenda el problema y realice casos de obteniendo las comisiones para los siguientes valores de ventas: 20000, 20001, 30000, 50000, 50001, 75000, y –3.
-* Codifique el algoritmo en C de modo que permita el calculo de las comisiones. Lleve a cabo las pruebas con los casos de test elegidos en el item anterior.
-
-**P2**. Escriba un programa en C para desplegar la tabla de multiplicación desde 1 hasta N.
-
-Test de entrada:
-
-```
-Numero final (empezando de 1): 8
-```
-Salida esperada:
-
-```
-Tabla de multiplicación desde 1 hasta 8:
-
-1x1 = 1, 2x1 = 2, 3x1 = 3, 4x1 = 4, 5x1 = 5, 6x1 = 6, 7x1 = 7, 8x1 = 8
-...
-1x10 = 10, 2x10 = 20, 3x10 = 30, 4x10 = 40, 5x10 = 50, 6x10 = 60, 7x10 = 70, 8x10 = 80
+```bash
+cd /home/don_ramon/Documents/sistemas_operativos/lab_C
+git clone https://github.com/so-udea/intro-C.git
+cd intro-C
+ls
 ```
 
-**P3**. Escriba un programa en C para imprimir la siguiente secuencia (dado el numero de renglones):
+Para profundizar mas sobre la información que se tratara a continuación, puede consultar los siguientes links:
+1. [Manejo básico del GNU Compiler Collection (GCC)
+](https://github.com/repos-SO-UdeA/laboratorios/tree/master/lab0/teoria/parte2/teoria)
+2. [GCC and Make - Compiling, Linking and Building
+C/C++ Applications](https://www3.ntu.edu.sg/home/ehchua/programming/cpp/gcc_make.html)
 
-```
-1
-01
-101
-0101
-10101
-```
+## Introducción al GCC ##
 
-### 2.2. Funciones
+### Elementos necesarios ###
+Existen muchas herramientas de compilación; sin embargo, a lo largo del laboratorio se va a hacer uso de GCC, el cual es el compilador por excelencia para Linux. Para compilar un programa se necesitan 3 elementos principalmente. En nuestro caso:
+1. PC con un sistema operativo: luede ser cualquier sistema operativo, pero para desarrollo, el sistema operativo por excelencia siempre va a ser Linux.
+2. Un compilador: las versiones de Linux suelen venir con el compilador gcc; en el caso de Windows, es necesario descargarlo, existen dos que pueden ser útiles: el Cygwin y el MinGW.
+3. Un Editor de textos o entorno de desarrollo (IDE): existen muchos tanto en modo texto (vi, emacs, vim, etc) como en modo grafico (codeblocks, qtcreator, eclipse, devc++, visual studio code, etc.).
 
-**Nota**: Los siguientes programas deben ser resueltos empleando funciones.
+### Proceso de compilación de aplicaciones ###
 
-**P1**. Escriba una función llamada múltiplo que tome dos enteros y determine si el segundo es múltiplo del primero. La función deberá tomar dos argumentos enteros y devolver 1 si el segundo es un múltiplo del primero y 0 si no. Luego, utilice esta función en un programa que acepte como entrada una serie de pares de enteros.
+La siguiente figura muestra el proceso que se sigue generalmente para codificar y compilar una aplicación un programa.
 
-**P2**. Escribir un programa que lea dos números **x** y **n** y en una función, calcule la suma de la progresión geométrica: 
+![proceso](./fig_proceso.png)
 
-```
-1 + x + x^2 + x^3 + x^4 + ⋯ + x^n
-```
 
-**P3**. Escriba un programa en C para encontrar la suma de las series: 
+#### Actividad 1 ####
 
-```
-1 - x^2/2! + x^4/4! - ...
-```
+Tome como base el tutorial [How to Compile and Run a C Program on Ubuntu Linux](http://webhotel4.ruc.dk/~keld/teaching/CAN_e14/Readings/How%20to%20Compile%20and%20Run%20a%20C%20Program%20on%20Ubuntu%20Linux.pdf). A continuación se muestra el código C que alli se muestra:
 
-Test data:
-```
-Valor de entrada de x: 2
-Numero de terminos: 5
-```
+```C
+#include <stdio.h>
 
-Salida esperada:
-
-```
-suma: -0.415873
+main() {
+ printf("Hello World\n");
+ return 0;
+}
 ```
 
-**P4**. Dado el siguiente código fuente:
+Codifique el programa, guardelo como **hello.c**. Ahora realizar el primer commit y suba a github el archivo fuente, luego, compilelo y ejecutelo empleando los siguientes comandos:
+
+```bash
+gcc -o hello hello.c
+./hello
+```
+
+Observe que los resultados sean parecidos a los del pdf. Luego tome una captura, guarderla y realice el respectivo commit asociado a esta (que sea bien descriptivo). Finalmente borre el archivo ejecutable **hello**:
+
+```bash
+rm hello
+```
+
+### Comprendiendo los comandos anteriormente vistos ###
+
+Como lo pudo notar en el caso anterior, se generó un ejecutable a partir de un archivo fuente. Vamos a tratar con un poco mas de detalle esta y otra forma de llevar a cado este proceso:
+
+1. **Generando el ejecutable en un solo paso**
+
+```bash
+gcc archivoFuente –o nombreEjecutable -Wall
+```
+
+**Dónde**:
+* **archivoFuente**: Archivo de extensión **.c** que será compilado y enlazado.
+* **nombreEjecutable**: Nombre del ejecutable generado tras la ejecución del comando.
+* **-Wall**: Esta opción activa todos las advertencias más comunes ¡se recomienda usar siempre esta opción!. Por defecto GCC no produce advertencias a menos que estén activadas. Las advertencias del compilador son una ayuda esencial detectando problemas al programar en lenguaje C.
+
+La anterior forma de uso del comando gcc, suele ser la más sencilla para compilar y enlazar un archivo fuente (archivo **.c**) de modo que se genera un ejecutable con nombre dado  por **nombreEjecutable**. 
+
+**Ejemplo**: Recordando el ejemplo anterior, si queremos generar a partir de hello.c un ejecutable llamado hello.out tenemos:
+
+```bash
+gcc hello.c -o hello.out
+```
+
+2. **Generando el ejecutable mediante compilacion por pasos (se eliminan los archivos intermetios)**
+
+El proceso de obtener un archivo ejecutable (entendible por la máquina) a partir de un archivo fuente (escrito en lenguaje de programación y entendido por el programador) involucra 4 etapas, las cuales son principalmente:
+1. Pre-procesamiento.
+2. Compilación.
+3. Ensamblado.
+4. Enlazado.
+
+La siguiente tabla resume los comandos aplicados anteriormente:
+
+| Paso | Acción            | Comando                                     | 
+|------|-------------------|---------------------------------------------|
+| 1    | Pre-procesamiento | ```gcc -E archivoFuente <-o archivoResultante>``` | 
+| 2    | Compilación       | ```gcc -S archivoFuente <-o archivoResultante>``` |
+| 3    | Ensamblado        | ```gcc -c archivoFuente <-o archivoResultante>``` | 
+| 4    | Enlazado          | ```gcc archivoObjeto <-o ejecutable>```           |
+
+
+**Ejemplo**: Recordando el ejemplo anterior, si queremos generar a partir de hello.c un ejecutable llamado hello.out pero queremos hacerlo por pasos teniendo en cuenta la tabla anterior tenemos:
+
+```bash
+gcc -E hello.c 
+gcc -S hello.c 
+gcc -c hello.c 
+gcc hello.o -o hello.out 
+```
+
+3. **Todo en un solo paso (generando el archivo ejecutable y dejando los archivos intermedios)**
+
+Cuando se ejecuta el comando ```gcc``` con la opción ```-save-temps``` los archivos intermedios resultantes de cada uno de los pasos no son eliminados, la forma como se ejecuta este comando es la siguiente:
+
+```bash
+gcc -save-temps archivoFuente <–o nombreEjecutable>
+```
+
+
+**Ejemplo**: Recordando el ejemplo anterior, si queremos generar a partir de hello.c un ejecutable llamado hello.out pero queremos hacerlo en un solo paso generando los archivos intermedios:
+
+```bash
+gcc -save-temps hello.c -o hello.out 
+```
+
+4. **Otras opciones con el gcc**
+A continuación mostramos algunas de las opciones más habituales al usar gcc:
+
+| Opción | Descripción            |
+|------|-------------------|
+| ```-help``` | Indica a gcc que muestre su salida de ayuda (muy reducida).|
+| ```-o <file>``` | El archivo ejecutable generado por gcc es por defecto a.out. Mediante este modificador, le especificamos el nombre del ejecutable.|
+| ```-Wall``` | No omite la detección de ninguna advertencia (warning).|
+| ```-g``` | Incluye en el binario información necesaria para utilizar un depurador posteriormente.|
+| ```-O <nivel>``` | Indica a gcc que utilice optimizaciones en el código. Los niveles posibles van desde 0 (no optimizar) hasta 3 (optimización máxima). Utilizar el optimizador aumenta el tiempo de compilación, pero suele generar programas que se  ejecutan más rápido.|
+| ```-E```| Sólo realiza la fase del preprocesador, no compila, ni ensambla, ni enlaza.|
+| ```-S``` | Preprocesa y compila, pero no ensambla ni enlaza.|
+| ```-c``` | Preprocesa, compila y ensambla, pero no enlaza.|
+| ```-I <dir>``` | Especifica un directorio adicional donde gcc debe buscar los archivos de cabecera indicados en el código fuente.|
+| ```-L <dir>``` | Especifica un directorio adicional donde gcc debe buscar las librerías necesarias en el proceso de enlazado.|
+| ```-l<library>``` | Especifica el nombre de una librería adicional que deberá ser utilizada en el proceso de enlazado.|
+
+**Ejemplo**: Recordando el ejemplo anterior, si queremos generar a partir de hello.c un ejecutable llamado hello.out pero hagamos uso de alguna de las opciones mas comunes
+
+```bash
+gcc -Wall hello.c -o hello.out 
+```
+
+La colección completa de modificadores a utilizar con gcc se encuentra en su página de manual, **man gcc**, o también si esta muy embalado puede llamar a nuestro santo favorito **google**.
+
+#### Actividad 2 - Reforzando los conceptos anteriormente vistos ####
+
+1. **Compilando una primera aplicación**: En el editor de textos codifique el siguiente código fuente:
+
+```C 
+#include <stdio.h>
+
+int main()
+{
+    printf( "Mr. Anderson, welcome back!!!\n" )
+    return 0;
+}
+```  
+
+2. Guarde el archivo fuente en una ruta adecuada (por ejemplo, la carpeta de trabajo actual asociada al codigo descargado del git) con el nombre de hola_mundo.c
+3. Compile el programa usando GCC y los parámetros adecuados para generar un ejecutable llamado ejecutable.
+4. Si hay errores, volver al código y corregirlos. De lo contrario ejecute el programa. 
+5. Haga el commit del código.
+
+> **Nota**: Para los puntos 2 y 3 cree un arhivo de texto y consigne alli las explicaciones de las preguntas que se hacen.
+
+2. **Análisis de código**: En el siguiente [video](https://www.youtube.com/watch?v=jl4r7u7IfJY) se explica el paso de parametros por linea de comandos. El código analizado, tomado del siguiente [enlace](http://bluefever.net/Downloads/BeginC/ch51.c) se muestra a continuación:
+
+```C
+#include "stdio.h"
+#include "string.h"
+
+// Codigo tomado de: http://bluefever.net/Downloads/BeginC/ch51.c
+
+int main(int argc, char *argv[]) {
+  printf("\nmain() : argc : %d \n", argc);
+  int index = 0;
+  for(index = 0; index < argc; ++index) {
+    // printf("main() : argv[%d] : %s\n",index,argv[index]);
+    if( strncmp( argv[index], "debug", 5) == 0 ) {
+      printf("main() : PROGRAM DEBUG MODE\n");
+    } else if ( strncmp( argv[index], "-file", 5) == 0 ) {
+      printf("main() : PROGRAM READ FILENAME : %s\n", argv[index + 1]);
+    }
+  }
+  printf("\nmain(): Program Quit\n");
+  return 0;
+}
+```
+
+Responda las siguientes preguntas en el archivo de texto:
+* ¿Que hacen los parametros argc y argv?
+* ¿Como se usa el programa? (Observe el video).
+
+Una vez reponda las preguntas realizar el respectivo commit.
+
+3. **Análisis de código**: Codifique el siguiente archivo fuente:
 
 ```C
 #include <stdio.h>
 #include <stdlib.h>
-#include <time.h>
+#define N 20
 
-int main () { 
-  int N, M, cant, i, aleatorio;
-  printf("Digite la cantidad de números que desea generar: ");
-  scanf("%d",&cant);
-  printf("Digite los limites (primero el superior, luego el inferior): ");
-  scanf("%d%d",&N,&M);
-  srand(time(NULL)); // Inicializacion del generador
-  for(i = 0; i < cant; i ++) { 
-    aleatorio = rand()%(N-M+1)+M; //Genera un numero entre M y N
-    printf("%d ", aleatorio);
-  } 
-  printf("\n", aleatorio);
-  system("PAUSE");
-  return 0;
-}
-```
+int edad_en_meses(int);
 
-a. Compile y ejecute el código fuente anteriormente mostrado. ¿Qué es lo que hacen las funciones  srand() y rand()? (Los singientes enlaces pueden serle de utilidad: [1](http://www.chuidiang.org/clinux/funciones/rand.php) y [2](http://arantxa.ii.uam.es/~swerc/ole/ejemplos/crandom.html))
-
-b. Escriba una función que genere un número aleatorio entre a y b. **Ayuda**: Use las funciones **srand()** y **rand()** anteriormente mencionadas.
-
-c. Realice un programa que invocando la función anteriormente creada, funcione de manera similar al programa analizado en el punto a.
-
-**P5**. Escriba una función que tome un valor entero y devuelva el número con sus dígitos en reversa. Por ejemplo, dado el numero 7631, la función deberá devolver 1367.
-
-**P6**. Una ecuación cuadrática es aquella que tiene la siguiente forma:
-
-```
-a*x^2 + b*x + c = 0
-```
-
-El discriminante es una expresión  que se forma a partir de los coeficientes del polinomio siguiendo la siguiente fórmula:
-
-```
-D = b^2 - 4*a*c
-```
-
-Según el valor del discriminante se pueden dar tres posibles situaciones:
-* **La ecuación cuadrática tiene como solución dos raíces reales y distintas**: Lo cual se da cuando **D > 0**.
-* **La ecuación cuadrática tiene dos raíces reales iguales**: Lo cual se da cuando **D = 0**.
-* **La ecuación cuadrática tiene como solución dos raíces complejas conjugadas**: Lo cual se da cuando **D < 0**
-
-a. Realizar una función (declaración y definición) que calcule el discriminante de una ecuación cuadrática. La función se deberá llamar discriminante y deberá recibir tres argumentos reales asociados a los coeficientes del polinomio cuadrático. Como valor de retorno esta debe devolver los siguientes valores para indicar cada uno de los tres posibles casos:
-* Cuando D < 0 la función deberá retornar -1.
-* Cuando D = 0 la función deberá devolver 0.
-* Cuando D > 0 la función deberá devolver 1.
-
-b. Una vez realizado lo anterior realizar un test breve de la función (el cual debe ser sustentado al docente) adaptando la declaración y la definición en el siguiente archivo fuente en el cual esta es invocada en el main:
-
-```C
-#include <stdio.h>
-
-// Aquí van los prototipos de la funciones
-
-int main() {
-  int x = 1,y = 2,z = 6,w;
-  w = discriminante(1,0,1);
-  printf("w = %d\n",w);
-  w = discriminante(y,z,x);
-  printf("w = %d\n",w);
-  w = discriminante(y++,--z,5);
-  printf("w = %d\n",w);
+int main(int argc, char *argv[])
+{
+  int edad = atoi(argv[1]);
+  int meses = edad_en_meses(edad);
+  printf("Edad %d \n", meses);
   return 0;
 }
 
-
-// Aquí van las definiciones de las funciones 
-
+int edad_en_meses(int anios){
+  int mes = anios * 12;
+  return mes;
+}
 ```
 
-c. Realizar un programa que solicite por teclado los valores de los coeficientes y de acuerdo a estos, despliegue si la ecuación cuadrática tiene raíces reales y distintas, reales e iguales o complejas conjugadas. Para tal fin se debe hacer uso de la función discriminante previamente creada.
+3. Para entender el codigo anterior y como usarlo vea el siguiente [video](https://www.youtube.com/watch?v=IhQp6eTkmaQ&list=PLlTZ99qnw3zIeOKP8YfMxaKt0GDhAKtHu&index=7) y responda las siguientes preguntas:
+* ¿Que hace la funcion atoi?
+* Ademas de atoi existen otras funciones que permitan convertir cadenas de caracteres a numeros reales ¿cuales?
+* Existen funciones que convierten valores numericos a cadenas de caracteres  ¿cuales?
 
-**P7**. Para obtener las raíces de una ecuación de segundo grado utilizando la fórmula:
+Una vez reponda las preguntas realizar el respectivo commit.
 
-```
-x1 = (-b - D^(1/2))/(2*a)
+### Enlaces de interes ###
 
-x2 = (-b + D^(1/2))/(2*a)
-```
-
-a. Realizar una función que calcule y despliegue las raíces de una ecuación cuadrática. Tenga en cuenta que el valor de estas depende de D de tal modo que:
-
-* Si D > 0 las raíces son: 
-
-```
-x1 = (-b - D^(1/2))/(2*a)
-
-x2 = (-b + D^(1/2))/(2*a)
-```
-
-Y la función deberá desplegar algo como: **x1, x2**
-
-* Si D = 0, las raíces serán: 
-
-```
-x1 = x2 = -b/(2*a)
-```
-
-Y la función deberá desplegar algo como: **x1 con multiplicidad 2**.
-
-* Si D < 0, las raíces serán: 
-
-```
-x1 = (-b/(2*a))i - ((-D)^(1/2))/(2*a))j
-
-x2 = (-b/(2*a))i + ((-D)^(1/2))/(2*a))j
-```
-
-Y la función deberá desplegar algo como: **R + Ij, R – Ij**.
-
-La función anterior se deberá llamar bachiller, y esta simplemente realizara los cálculos de las raíces desplegando los resultados (no devolviéndolos porque son 2) por lo tanto el valor de retorno deberá ser tipo void. La función anterior deberá invocar la función del punto 1 para el cálculo del discriminante. 
-
-b. Invocar en el main la función varias veces de tal manera que la salida sea la mostrada en la siguiente captura de pantalla:
-
-```
-1 2 2
-1 3 2
-1 2 1
-2 3 1
-2.1 3.2 1.7 
-2 2 0.5
-
--1.00 + 1.00j, -1.00 - 1.00j  
--2.00. -1.00
--1.00 con multiplicidad 2
--0.76 + 0.48j, -0.76 - 0.48j 
--0.50 con multiplicidad 2
-```
-
-c. Realizar un programa que solicite al usuario los valores de los coeficientes y que haciendo uso de la función bachiller despliegue las raíces de estos coeficientes desplegados en pantalla.
-
-**P8**. Escriba un programa que simule el lanzamiento de una moneda. En cada línea de entrada aparece el número de lanzamientos de la moneda. En la línea de salida correspondiente debe aparecer una secuencia con el resultado de cada lanzamiento ('C' cuando fue cara y 'S' cuando fue sello) junto con el número de veces que aparece cada lado. El programa deberá usar una función que se encargue de simular el lanzamiento de la moneda una sola vez, que no tome argumentos y que retorne 0 para la cara ('C') ó 1 para el sello ('T').
-
-Ayuda: Use las funciones srand() y rand() para simular el lanzamiento de la moneda.
-
-Ejemplo de algunos casos de entrada:
-
-585
-
-Casos de salida correspondientes:
-
-CCSSS, #de caras = 2, # de sellos = 3
-SCCSCSCC, #de caras = 5, # de sellos = 3
-SCSCC, # de caras = 3, # de sellos = 2
-
-**P9**. Las computadoras están jugando un papel creciente en la educación. Escriba un programa que ayudaría a un alumno de escuela primaria a aprender a multiplicar. Utilice rand() para producir dos enteros positivos de un dígito. A continuación debería imprimir una pregunta coma la siguiente:
-
-```
-¿Cuánto es 6 veces 7?
-```
-
-A continuación el alumno escribe la respuesta. Su programa verifica la respuesta del alumno. Si es correcta imprime **"Muy bien!"** y a continuación solicita otra multiplicación. Si la respuesta es incorrecta imprimirá **"No. Por favor intenta nuevamente"** y a continuación permitirá que el alumno vuelva a intentar con la misma pregunta de forma repetida hasta que al final la conteste correctamente. El programa debe indicarle al alumno una forma de terminar la ejecución.
-
-
-**P10**. La utilización de las computadoras en la educación se conoce como Instrucción Asistida por Computadora (CAI). Un problema que se desarrolla en los entornos CIA es la fatiga del alumno. Este problema puede ser enfrentado variando el diálogo de la computadora para retener la atención del alumno. Modifique el programa del ejercicio anterior de modo que este escoja de forma aleatoria uno de cuatro posibles mensajes tanto para respuestas correctas como para respuestas incorrectas. Los cuatro posibles mensajes en cada caso son:
-
-Respuestas correctas:
-
-```
-Muy bien!
-Excelente!
-Buen trabajo!
-Sigue haciéndolo bien!
-```
-
-Respuestas incorrectas:
-
-```
-No. Por favor trata de nuevo.
-Incorrecto. Trata una vez más.
-No te rindas!
-No. Trata de nuevo
-```
-**Nota**: Mediante el generador de números aleatorios, seleccione un número entre 1 y 4 para desplegar un mensaje diferente para cada respuesta. Presente la respuesta mediante una estructura switch.
-
-**P11**. Sistemas más avanzados de CAI vigilan el rendimiento del alumno a lo largo de un periodo de tiempo. La decisión para empezar un tema nuevo se basa a menudo en el éxito del alumno en relación con temas anteriores. Modifique el programa del ejercicio anterior para contar el número de respuestas correctas e incorrectas del estudiante. Una vez el estudiante decida terminar la ejecución del programa, el programa debe calcular y mostrar el porcentaje de respuestas correctas respecto al total de preguntas que le hizo el programa. Si el porcentaje es menor a 75%, el programa deberá imprimir el mensaje "**Por favor pídele ayuda al instructor"** y termina.
-
-
-## 3. Referencias
-
-* https://github.com/malmhaug/C_AbsBegin
-* https://github.com/mindfullofit/CSCI320/tree/master/rewritten_code
+1. https://www.thegeekstuff.com/2011/10/c-program-to-an-executable/
+2. https://www.thegeekstuff.com/2011/10/c-program-to-an-executable/
+3. https://www.ibm.com/developerworks/aix/library/au-unixtools.html
+4. https://jlospinoso.github.io/developing/software/software%20engineering/reverse%20engineering/assembly/2015/03/06/reversing-with-ida.html
+5. https://www.perspectiverisk.com/intro-to-basic-disassembly-reverse-engineering/
+6. https://www.thegeekstuff.com/2012/03/linux-nm-command/
 
 
 
@@ -312,16 +250,4 @@ No. Trata de nuevo
 
 
 
-<!---
-
-
-https://github.com/repos-SO-UdeA/lab1/tree/master/parte1
-
-
-https://github.com/repos-SO-UdeA/laboratorios/tree/master/lab1/sesiones/1
-
-https://github.com/repos-SO-UdeA/laboratorios/tree/master/lab1
-
-https://colab.research.google.com/github/tigarto/2018-1/blob/master/intro_C_basico.ipynb
--->
 
