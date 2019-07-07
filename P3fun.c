@@ -5,13 +5,23 @@ int main()
 {
     int x,m;
     
-  	int factorial (int x){
-        float fact;
-         for (int b = x; b > 1; b--){
-             fact = fact * b;
-         }
-        return fact; 
+   int factorial(int x){
+
+   int b;
+ 
+   int fact = 1;
+
+    b = x ;
+
+    for (int i = 1; i <= b; i++){
+
+            fact = fact * i;
+
     }
+
+    return fact;
+
+}
     
     double serie (int x, int m){
         
@@ -20,7 +30,7 @@ int main()
         int aux=2;
         for (int i=2;i<=m;i++){
             
-            if(i%2==0){
+            if((i%2)==0){
                 resultado = resultado - (double)((pow(x,aux))/factorial(aux));
                
                 
